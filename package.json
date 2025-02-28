@@ -9,7 +9,8 @@
     "start": "NODE_ENV=production bun src/http/server.ts",
     "test": "bun test",
     "generate": "drizzle-kit generate",
-    "migrate": "drizzle-kit migrate"
+    "migrate": "drizzle-kit migrate",
+    "studio": "drizzle-kit studio"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
@@ -23,6 +24,7 @@
     "@paralleldrive/cuid2": "^2.2.2",
     "drizzle-orm": "^0.40.0",
     "elysia": "^1.2.23",
-    "postgres": "^3.4.5"
+    "postgres": "^3.4.5",
+    "zod": "^3.24.2"
   }
 }
