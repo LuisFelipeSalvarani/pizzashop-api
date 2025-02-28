@@ -15,6 +15,20 @@
       "when": 1740753315536,
       "tag": "0001_useful_mandarin",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1740760202629,
+      "tag": "0002_silent_whistler",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1740760295766,
+      "tag": "0003_same_doorman",
+      "breakpoints": true
     }
   ]
 }
