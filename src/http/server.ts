@@ -1,6 +1,7 @@
 import { swagger } from '@elysiajs/swagger'
 import { Elysia } from 'elysia'
 import { authenticateFromLink } from './routes/authenticate-from-link'
+import { getManagedRestaurant } from './routes/get-managed-restaurant'
 import { getProfile } from './routes/get-profile'
 import { registerRestaurant } from './routes/register-restaurants'
 import { sendAuthLink } from './routes/send-auth-link'
@@ -13,6 +14,7 @@ const app = new Elysia()
   .use(authenticateFromLink)
   .use(sighOut)
   .use(getProfile)
+  .use(getManagedRestaurant)
 
 app.listen(3333, () => {
   console.log('🔥 HTTP server running!')
