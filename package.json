@@ -17,6 +17,7 @@
     "@biomejs/biome": "1.9.4",
     "@faker-js/faker": "^9.5.1",
     "@types/bun": "latest",
+    "@types/nodemailer": "^6.4.17",
     "chalk": "^5.4.1",
     "drizzle-kit": "^0.30.5"
   },
@@ -30,6 +31,7 @@
     "dayjs": "^1.11.13",
     "drizzle-orm": "^0.40.0",
     "elysia": "^1.2.23",
+    "nodemailer": "^6.10.0",
     "postgres": "^3.4.5",
     "zod": "^3.24.2"
   }
