@@ -1,5 +1,6 @@
 import { swagger } from '@elysiajs/swagger'
 import { Elysia } from 'elysia'
+import { approveOrder } from './routes/approve-order'
 import { authenticateFromLink } from './routes/authenticate-from-link'
 import { getManagedRestaurant } from './routes/get-managed-restaurant'
 import { getOrderDetails } from './routes/get-order-details'
@@ -17,6 +18,7 @@ const app = new Elysia()
   .use(getProfile)
   .use(getManagedRestaurant)
   .use(getOrderDetails)
+  .use(approveOrder)
   .onError(({ code, error, set }) => {
     switch (code) {
       case 'VALIDATION': {
