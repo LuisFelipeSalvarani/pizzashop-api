@@ -12,6 +12,7 @@ import { getMonthOrdersAmount } from './routes/get-month-orders-amount'
 import { getMonthReceipt } from './routes/get-month-receipt'
 import { getOrderDetails } from './routes/get-order-details'
 import { getOrders } from './routes/get-orders'
+import { getPopularProducts } from './routes/get-popular-products'
 import { getProfile } from './routes/get-profile'
 import { registerRestaurant } from './routes/register-restaurants'
 import { sendAuthLink } from './routes/send-auth-link'
@@ -35,6 +36,7 @@ const app = new Elysia()
   .use(getDayOrdersAmount)
   .use(getMonthOrdersAmount)
   .use(getMonthCanceledOrdersAmount)
+  .use(getPopularProducts)
   .onError(({ code, error, set }) => {
     switch (code) {
       case 'VALIDATION': {
