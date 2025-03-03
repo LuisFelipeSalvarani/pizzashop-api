@@ -43,6 +43,13 @@
       "when": 1741001641004,
       "tag": "0005_steep_kinsey_walden",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1741002755549,
+      "tag": "0006_brave_stingray",
+      "breakpoints": true
     }
   ]
 }
