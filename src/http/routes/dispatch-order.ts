@@ -45,8 +45,17 @@ export const dispatchOrder = new Elysia().use(auth).patch(
       .where(eq(orders.id, orderId))
   },
   {
+    detail: {
+      tags: ['Orders'],
+    },
     params: t.Object({
       orderId: t.String(),
     }),
+    response: {
+      200: t.Undefined(),
+      400: t.Object({
+        message: t.String()
+      })
+    }
   }
 )

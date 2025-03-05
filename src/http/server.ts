@@ -20,7 +20,21 @@ import { sendAuthLink } from './routes/send-auth-link'
 import { sighOut } from './routes/sign-out'
 
 const app = new Elysia()
-  .use(swagger())
+  .use(swagger({
+    documentation: {
+      info: {
+        title: 'Pizza Shop API Documentation',
+        version: '1.0.0'
+      },
+      tags: [
+        {name: 'Auth', description: 'Authentication endpoints.'},
+        {name: 'Profile', description: 'Profile endpoints.'},
+        {name: 'Restaurants', description: 'Restaurants endpoints.'},
+        {name: 'Orders', description: 'Orders endpoints.'},
+        {name: 'Metrics', description: 'Metrics endpoints.'},
+      ],
+    }
+  }))
   .use(registerRestaurant)
   .use(sendAuthLink)
   .use(authenticateFromLink)

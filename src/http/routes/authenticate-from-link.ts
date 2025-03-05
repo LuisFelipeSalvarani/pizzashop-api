@@ -45,9 +45,15 @@ export const authenticateFromLink = new Elysia().use(auth).get(
     return redirect(redirectLink, 302)
   },
   {
+    detail: {
+      tags: ['Auth'],
+    },
     query: t.Object({
       code: t.String(),
       redirect: t.String(),
     }),
+    response: {
+      302: t.Undefined()
+    }
   }
 )

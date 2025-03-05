@@ -1,14 +1,14 @@
 import dayjs from 'dayjs'
 import { and, count, eq, gte, sql } from 'drizzle-orm'
-import Elysia from 'elysia'
+import Elysia, { t } from 'elysia'
 import { db } from '../../db/client'
 import { orders } from '../../db/schema'
 import { auth } from '../auth'
 import { UnauthorizedError } from '../errors/unauthorized-error'
 
-export const getMonthOrdersAmount = new Elysia()
-  .use(auth)
-  .get('/metrics/month-orders-amount', async ({ getCurrentUser }) => {
+export const getMonthOrdersAmount = new Elysia().use(auth).get(
+  '/metrics/month-orders-amount',
+  async ({ getCurrentUser }) => {
     const { restaurantId } = await getCurrentUser()
 
     if (!restaurantId) {
@@ -55,4 +55,19 @@ export const getMonthOrdersAmount = new Elysia()
         ? Number((diffFromLastMonth - 100).toFixed(2))
         : 0,
     }
-  })
+  },
+  {
+    detail: {
+      tags: ['Metrics'],
+    },
+    response: {
+      200: t.Object({
+        amount: t.MaybeEmpty(t.Number()),
+        diffFromLastMonth: t.Number(),
+      }),
+      400: t.Object({
+        message: t.String(),
+      }),
+    },
+  }
+)

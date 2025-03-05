@@ -1,13 +1,13 @@
 import { desc, eq, sum } from 'drizzle-orm'
-import { Elysia } from 'elysia'
+import { Elysia, t } from 'elysia'
 import { db } from '../../db/client'
 import { orderItens, orders, products } from '../../db/schema'
 import { auth } from '../auth'
 import { UnauthorizedError } from '../errors/unauthorized-error'
 
-export const getPopularProducts = new Elysia()
-  .use(auth)
-  .get('/metrics/popular-products', async ({ getCurrentUser }) => {
+export const getPopularProducts = new Elysia().use(auth).get(
+  '/metrics/popular-products',
+  async ({ getCurrentUser }) => {
     const { restaurantId } = await getCurrentUser()
 
     if (!restaurantId) {
@@ -30,4 +30,18 @@ export const getPopularProducts = new Elysia()
       .limit(5)
 
     return popularProducts
-  })
+  },
+  {
+    detail: {
+      tags: ['Metrics'],
+    },
+    response: {
+      200: t.Array(
+        t.Object({
+          product: t.Nullable(t.String()),
+          amount: t.Number(),
+        })
+      ),
+    },
+  }
+)

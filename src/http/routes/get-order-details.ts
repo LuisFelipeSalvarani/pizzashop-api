@@ -56,13 +56,51 @@ export const getOrderDetails = new Elysia().use(auth).get(
 
       return { message: 'Order not found.' }
     }
-    console.log(order)
 
     return order
   },
   {
+    detail: {
+      tags: ['Orders'],
+    },
     params: t.Object({
       orderId: t.String(),
     }),
+    response: {
+      200: t.Object({
+        id: t.String({ format: 'uuid' }),
+        status: t.UnionEnum([
+          'pending',
+          'processing',
+          'delivering',
+          'delivered',
+          'canceled',
+        ]),
+        totalInCents: t.Number(),
+        createdAt: t.Date(t.String({ format: 'date-time' })),
+        customer: t.Nullable(
+          t.Object({
+            email: t.String({ format: 'email' }),
+            name: t.String(),
+            phone: t.Nullable(t.String()),
+          })
+        ),
+        orderItens: t.Array(
+          t.Object({
+            id: t.String({ format: 'uuid' }),
+            priceInCents: t.Number(),
+            quantity: t.Number(),
+            product: t.Nullable(
+              t.Object({
+                name: t.String(),
+              })
+            ),
+          })
+        ),
+      }),
+      400: t.Object({
+        message: t.String(),
+      }),
+    },
   }
 )

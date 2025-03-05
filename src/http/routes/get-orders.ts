@@ -65,11 +65,40 @@ export const getOrders = new Elysia().use(auth).get(
     }
   },
   {
+    detail: {
+      tags: ['Orders'],
+    },
     query: t.Object({
       customerName: t.Optional(t.String()),
       orderId: t.Optional(t.String()),
       status: t.Optional(createSelectSchema(orders).properties.status),
       pageIndex: t.Numeric({ minimum: 0 }),
     }),
+    response: {
+      200: t.Object({
+        orders: t.Array(
+          t.Object({
+            customerName: t.String(),
+            id: t.String({ format: 'uuid' }),
+            customerId: t.Nullable(t.String({ format: 'uuid' })),
+            restaurantId: t.String({ format: 'uuid' }),
+            status: t.UnionEnum([
+              'pending',
+              'processing',
+              'delivering',
+              'delivered',
+              'canceled',
+            ]),
+            totalInCents: t.Number(),
+            createdAt: t.Date(t.String({ format: 'date-time' })),
+          })
+        ),
+        meta: t.Object({
+          pageIndex: t.Number(),
+          perPage: t.Number(),
+          totalCount: t.Number(),
+        }),
+      }),
+    },
   }
 )

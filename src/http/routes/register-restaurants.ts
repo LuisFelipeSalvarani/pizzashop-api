@@ -27,6 +27,9 @@ export const registerRestaurant = new Elysia().post(
     set.status = 204
   },
   {
+    detail: {
+      tags: ['Restaurants'],
+    },
     body: t.Object({
       restaurantName: t.String(),
       managerName: t.String(),

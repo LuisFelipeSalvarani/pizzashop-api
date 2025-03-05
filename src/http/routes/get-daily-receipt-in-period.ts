@@ -69,9 +69,21 @@ export const getDailyReceiptInPeriod = new Elysia().use(auth).get(
     return orderedReceiptPerDay
   },
   {
+    detail: {
+      tags: ['Metrics'],
+    },
     query: t.Object({
       from: t.Optional(t.String()),
       to: t.Optional(t.String()),
     }),
+    response: {
+      200: t.Array(t.Object({
+        date: t.String({format: 'date'}),
+        receipt: t.Numeric(),
+      })),
+      400: t.Object({
+        message: t.String()
+      })
+    }
   }
 )
